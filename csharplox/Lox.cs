@@ -40,7 +40,7 @@ class Lox
 
 
         foreach (Token token in tokens) {
-            Console.WriteLine(token);
+            Console.WriteLine(token.toString());
         }
     }
 

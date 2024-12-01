@@ -7,6 +7,24 @@ class Scanner {
     private int start = 0;
     private int current = 0;
     private int line = 1;
+    private Dictionary<string, TokenType> keywords = new Dictionary<string, TokenType>
+    {
+        {"and", TokenType.AND},
+        {"class", TokenType.CLASS},
+        {"else", TokenType.ELSE},
+        {"false", TokenType.FALSE},
+        {"for", TokenType.FOR},
+        {"fun", TokenType.FUN},
+        {"if", TokenType.IF},
+        {"nil", TokenType.NIL},
+        {"or", TokenType.OR},
+        {"print", TokenType.PRINT},
+        {"return", TokenType.RETURN},
+        {"super", TokenType.SUPER},
+        {"this", TokenType.THIS},
+        {"var", TokenType.VAR},
+        {"while", TokenType.WHILE}
+    };
 
     public Scanner(string source) {
         this.source = source;
@@ -51,6 +69,8 @@ class Scanner {
             default:
                   if (isDigit(c)) {
                       number();
+                  } else if (isAlpha(c)) {
+                      identifier();
                   } else {
                       Lox.error(line, "Unexpected character");
                   }
@@ -58,6 +78,29 @@ class Scanner {
 
         }
 
+    }
+
+    private void identifier() {
+        
+        while (isAlphaNumeric(peek())) advance();
+
+        string text = source.Substring(start, current_minus_start());
+        TokenType type;
+        try {
+            type = keywords[text];
+        } catch (KeyNotFoundException ex) {
+            type = TokenType.IDENTIFIER;
+        }
+
+        addToken(type);
+    }
+
+    private bool isAlpha(char c) {
+        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
+    }
+
+    private bool isAlphaNumeric(char c) {
+        return isAlpha(c) || isDigit(c);
     }
 
     private void _string() {
@@ -72,7 +115,7 @@ class Scanner {
         }
 
         advance();
-        string value = source.Substring(start + 1, current_minus_start() - 1);
+        string value = source.Substring(start + 1, current_minus_start() - 2);
         addToken(TokenType.STRING, value);
     }
 
