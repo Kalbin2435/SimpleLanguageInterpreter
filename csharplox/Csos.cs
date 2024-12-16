@@ -1,13 +1,13 @@
 ﻿using System.Text;
-namespace csharplox;
+namespace csharpos;
 
-class Lox
+class Csos
 {
     static bool hadError = false;
     static void Main(string[] args)
     {
         if(args.Length > 1) {
-            Console.WriteLine("Usage: csharplox [script]");
+            Console.WriteLine("Usage: csharpos [script]");
             Environment.Exit(64);
         } else if(args.Length == 1) {
             runFile(args[0]);

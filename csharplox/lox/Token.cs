@@ -1,4 +1,4 @@
-namespace csharplox;
+namespace csharpos;
 
 class Token {
     TokenType type;

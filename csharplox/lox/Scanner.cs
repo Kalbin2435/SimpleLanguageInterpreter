@@ -1,4 +1,4 @@
-namespace csharplox;
+namespace csharpos;
 
 class Scanner {
 
@@ -72,7 +72,7 @@ class Scanner {
                   } else if (isAlpha(c)) {
                       identifier();
                   } else {
-                      Lox.error(line, "Unexpected character");
+                      Csos.error(line, "Unexpected character");
                   }
                   break;
 
@@ -110,7 +110,7 @@ class Scanner {
         }
 
         if(isAtEnd()) {
-            Lox.error(line, "Unterminated string.");
+            Csos.error(line, "Unterminated string.");
             return;
         }
 

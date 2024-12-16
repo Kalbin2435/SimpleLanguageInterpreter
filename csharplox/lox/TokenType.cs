@@ -1,6 +1,6 @@
 
 
-namespace csharplox;
+namespace csharpos;
 
 enum TokenType {
 
